@@ -10,6 +10,7 @@ pub struct Entry {
     pub title: Option<String>,
     pub url: String,
     pub time: Option<i32>,
+    #[serde(default)]
     pub vlc_opt: HashMap<String, String>,
 }
 
