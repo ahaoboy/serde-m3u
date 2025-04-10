@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 const EXTM3U: &str = "#EXTM3U";
 const EXTINF: &str = "#EXTINF";
@@ -10,8 +9,8 @@ pub struct Entry {
     pub title: Option<String>,
     pub url: String,
     pub time: Option<i32>,
-    #[serde(default)]
-    pub vlc_opt: HashMap<String, String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub vlc_opt: Vec<(String, String)>,
 }
 
 impl core::fmt::Display for Entry {
@@ -81,14 +80,14 @@ impl<'a> From<&'a str> for Playlist {
                     url: s.to_string(),
                     title: None,
                     time: None,
-                    vlc_opt: HashMap::new(),
+                    vlc_opt: Vec::new(),
                 });
                 for i in lines {
                     list.push(Entry {
                         url: i.to_string(),
                         title: None,
                         time: None,
-                        vlc_opt: HashMap::new(),
+                        vlc_opt: Vec::new(),
                     })
                 }
             } else {
@@ -111,7 +110,7 @@ impl<'a> From<&'a str> for Playlist {
                         {
                             let k = line[key_index + 1..value_index].to_owned();
                             let v = line[value_index + 1..].to_owned();
-                            entry.vlc_opt.insert(k, v);
+                            entry.vlc_opt.push((k, v));
                         }
                     } else {
                         entry.url = line.trim().to_owned();
