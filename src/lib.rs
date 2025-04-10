@@ -28,10 +28,18 @@ impl core::fmt::Display for Entry {
 
         let info = match (self.time, self.title.clone()) {
             (Some(d), Some(t)) => {
-                format!("{EXTINF}:{},{}\n{}", d, t, s)
+                if t.is_empty() {
+                    format!("{EXTINF}:{}\n{}", d, s)
+                } else {
+                    format!("{EXTINF}:{},{}\n{}", d, t, s)
+                }
             }
             (None, Some(t)) => {
-                format!("{EXTINF}:0,{}\n{}", t, s)
+                if t.is_empty() {
+                    format!("{EXTINF}:0\n{}", s)
+                } else {
+                    format!("{EXTINF}:0,{}\n{}", t, s)
+                }
             }
             (Some(d), None) => {
                 format!("{EXTINF}:{}", d)
@@ -119,7 +127,7 @@ impl<'a> From<&'a str> for Playlist {
 
 #[cfg(test)]
 mod test {
-    use crate::Playlist;
+    use crate::{Entry, Playlist};
 
     #[test]
     pub fn base() {
@@ -153,5 +161,18 @@ Alice in Chains_Jar of Flies_02_Nutshell.mp3
 
         assert_eq!(playlist.list.len(), 1);
         assert_eq!(playlist.to_string(), s);
+    }
+
+    #[test]
+    pub fn test_empty_title() {
+        let e = Entry {
+            title: Some("".to_owned()),
+            url: "abc".to_owned(),
+            time: None,
+            vlc_opt: Default::default(),
+        };
+
+        let s = e.to_string();
+        assert_eq!(s, "#EXTINF:0\nabc")
     }
 }
