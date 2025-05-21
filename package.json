@@ -1,0 +1,31 @@
+{
+  "name": "serde-m3u",
+  "version": "0.1.0",
+  "description": "serde-m3u",
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "ahaoboy",
+  "license": "MIT",
+  "homepage": "https://github.com/ahaoboy/serde-m3u",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahaoboy/serde-m3u.git"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest --run",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "vitest": "3.0.5",
+    "@types/node": "22.13.2",
+    "esbuild": "0.25.0",
+    "typescript": "5.7.3"
+  },
+  "keywords": [
+    "serde-m3u"
+  ]
+}
