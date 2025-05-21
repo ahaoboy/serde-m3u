@@ -70,7 +70,7 @@ export class Playlist {
   // Parse an M3U string to create a Playlist instance
   static fromString(value: string): Playlist {
     const list: Entry[] = [];
-    const lines = value.split("\n");
+    const lines = value.replaceAll("\r\n", "\n").split("\n");
 
     if (lines.length > 0) {
       const first = lines[0].trim();
