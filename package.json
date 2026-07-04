@@ -1,31 +1,34 @@
 {
   "name": "serde-m3u",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "serde-m3u",
-  "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
-  "author": "ahaoboy",
-  "license": "MIT",
-  "homepage": "https://github.com/ahaoboy/serde-m3u",
-  "files": [
-    "dist"
+  "keywords": [
+    "serde-m3u"
   ],
+  "homepage": "https://github.com/ahaoboy/serde-m3u",
+  "license": "MIT",
+  "author": "ahaoboy",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahaoboy/serde-m3u.git"
   },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "pre-check": "oxfmt && oxlint --fix",
     "test": "vitest",
     "test:run": "vitest --run",
     "build": "tsc"
   },
   "devDependencies": {
-    "vitest": "3.0.5",
-    "@types/node": "22.13.2",
-    "esbuild": "0.25.0",
-    "typescript": "5.7.3"
-  },
-  "keywords": [
-    "serde-m3u"
-  ]
+    "@types/node": "26.1.0",
+    "esbuild": "0.28.1",
+    "oxfmt": "0.57.0",
+    "oxlint": "1.72.0",
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
+  }
 }
